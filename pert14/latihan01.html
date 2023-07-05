@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Jquery 01</title>
+</head>
+<body>
+    
+    <h3>Judul</h3>
+    <div id="pesan1">Isi ID pesan1</div>
+    <div class="pesan1">Isi Class pesan1</div>
+    <hr>
+
+    <h1 style="text-align: center;">Biodata Diri</h1>
+    <div class="border" style="border: 2px solid black; padding: 10px;">
+        <div id="nama">Nama</div>
+        <div class="nama"></div><br>
+        <div id="nim">NIM</div>
+        <div class="nim"></div><br>
+        <div id="prodi">Prodi</div>
+        <div class="prodi"></div>
+    </div>
+
+    <script src="jquery-3.7.0.min.js"></script>
+    <script>
+        $(function(){
+            $("h3").html("Isi dari judul di ganti");
+            $("#pesan1").html("pesan 1 di ubah");
+            $(".pesan1").html("mengubah isi dari class pesan 1");
+            $(".nama").html("I Kadek Prayoga Putra Mahendra");
+            $(".nim").html("2201010494");
+            $(".prodi").html("TI-MDI")
+        });
+    </script>
+</body>
+</html>

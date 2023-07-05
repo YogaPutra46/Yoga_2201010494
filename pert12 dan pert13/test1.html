@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>membaca data json</title>
+</head>
+<body>
+  
+    <h3>format form</h3>
+    NIM : <input type="text" id="txNIM"><br>
+    Nama : <input type="text" id="txNama"><br>
+    Jenis Kelamin : <input type="text" id="txJenisKelamin"><br>
+    jurusan : <input type="text" id="txJurusan"><br>
+    kelas : <input type="text" id="txKelas"><br>
+    Tanggal Lahir : <input type="date" id="txLahir">
+    
+    <h3>Format text</h3>
+    NIM : <span id="txNIM2"></span><br>
+    Nama : <span id="txNama2"></span><br>
+    Jenis Kelamin : <span id="txKelamin2"></span><br>
+    Jurusan : <span id="txJurusan2"></span><br>
+    Kelas : <span id="txKelas2"></span><br>
+    Tanggal lahir : <span id="txLahir2"></span><br>
+
+    <script>
+        let target = "http://localhost/pertemuan12/test1.php";
+        const bacadata = new XMLHttpRequest();
+        bacadata.open("GET",target);
+        bacadata.send();
+        bacadata.onload = function(){
+            const data = JSON.parse(this.responseText);
+            let JkEL = (data.JkEL=="L")?"Laki-Laki":"Perempuan";
+
+            console.log(data);
+            document.getElementById("txNIM").value = data.NIM;
+            document.getElementById("txNama").value = data.NAMA;
+            document.getElementById("txJenisKelamin").value = JkEL;
+            document.getElementById("txJurusan").value = data.jRSN;
+            document.getElementById("txKelas").value = data.kLS;
+            document.getElementById("txLahir").value = data.tGLHRN;
+
+
+            document.getElementById("txNIM2").textContent = data.NIM;
+            document.getElementById("txNama2").textContent = data.NAMA;
+            document.getElementById("txKelamin2").textContent = data.JkEL;
+            document.getElementById("txJurusan2").textContent = data.jRSN;
+            document.getElementById("txKelas2").textContent = data.kLS;
+            document.getElementById("txLahir2").textContent = data.tGLHRN;
+        }
+
+    </script>
+
+</body>
+</html>

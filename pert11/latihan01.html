@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan JSON</title>
+</head>
+<body>
+    <h3>Format Form</h3>
+    Nama : <input type="text" id="NAMA"><br>
+    Nim : <input type="text" id="NIM"><br>
+    Jenis Kelamin : <input type="text" id="JENISKELAMIN"><br>
+    Alamat : <input type="text" id="ALAMAT"><br>
+    Hobi : <input type="text" id="HOBI"><br>
+    Tanggal Lahir : <input type="text" id="TGLLAHIR"><br>
+    Universitas : <input type="text" id="UNIV"><br>
+
+    <h3>Format text</h3>
+    Nama : <span id="TXNAMA2"></span><br>
+    Nim : <span id="TXNIM2"></span><br>
+    Jenis Kelamin : <span id="TXJENISKELAMIN2"></span><br>
+    Alamat : <span id="TXALAMAT2"></span><br>
+    Hobi : <span id="TXHOBI2"></span><br>
+    Tanggal Lahir : <span id="TXTGLLAHIR2"></span><br>
+    Universitas : <span id="TXUNIV2"></span><br>
+
+    <script>
+        const bacadata = new XMLHttpRequest();
+        bacadata.open("GET","http://localhost/pertemuan11/latihan01.php");
+        bacadata.send();
+        bacadata.onload = function(){
+            const dta = JSON.parse(this.responseText);
+            let jkel = (dta.JENISKELAMIN=="Laki-laki")?"Laki-Laki":"Perempuan"; 
+            if(dta.JENISKELAMIN=="Laki-laki"){
+                jkel ="Laki-Laki";
+            }else{
+                jkel="Perempuan";
+            }
+
+            console.log(dta);
+            document.getElementById("NIM").value = dta.NIM;
+            document.getElementById("NAMA").value = dta.NAMA;
+            document.getElementById("JENISKELAMIN").value = jkel;
+            document.getElementById("ALAMAT").value = dta.ALAMAT;
+            document.getElementById("HOBI").value = dta.HOBI;
+            document.getElementById("TGLLAHIR").value = dta.TGLLAHIR;
+            document.getElementById("UNIV").value = dta.UNIV;
+
+            <!-- Format text -->
+            document.getElementById("TXNIM2").innerHTML = dta.NIM;
+            document.getElementById("TXNAMA2").innerHTML = dta.NAMA;
+            document.getElementById("TXJENISKELAMIN2").innerHTML = jkel;
+            document.getElementById("TXALAMAT2").innerHTML = dta.ALAMAT;
+            document.getElementById("TXHOBI2").innerHTML = dta.HOBI;
+            document.getElementById("TXTGLLAHIR2").innerHTML = dta.TGLLAHIR;
+            document.getElementById("TXUNIV2").innerHTML = dta.UNIV;
+            
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubah Data</title>
+</head>
+<body>
+    
+    <h3>Ubah Data User</h3>
+    <form>
+        <div>
+            Nama Lengkap
+            <input type="text" id="txNAMA">
+        </div>
+        <div>
+            Email
+            <input type="email" id="txEMAIL">
+        </div>
+        <div>
+            Username
+            <input type="text" id="txUSERNAME">
+        </div>
+        <div>
+            Password
+            <input type="password" id="txPASS1">
+        </div>
+        <div>
+            Verifikasi Password
+            <input type="password" id="txPASS2">
+        </div>
+
+        <div>
+            <button type="button" onclick="destroydata()">Delete Data</button>
+        </div>
+    </form>
+    <script>
+        const storedta = new XMLHttpRequest();
+
+        caridata();
+
+        function caridata(){
+            const qs = window.location.search;
+            const usp = new URLSearchParams(qs);
+            let iduser = usp.get("id");
+            let target ="https://webpro.ptov.my.id/api/curduser.php?aksi=get&q="+iduser;
+            storedta.open("GET", target, true);
+            console.log(iduser);
+            storedta.onload = function(){
+                const gdta = JSON.parse(this.responseText);
+                document.getElementById("txNAMA").value = gdta.isi[0][0];
+                document.getElementById("txEMAIL").value = gdta.isi[0][1];
+                document.getElementById("txUSERNAME").value = gdta.isi[0][2];
+                
+            }
+            storedta.send();
+        }
+
+        function destroydata(){
+            const qs = window.location.search;
+            const usp = new URLSearchParams(qs);
+            let iduser = usp.get("id");
+            let target = "https://webpro.ptov.my.id/api/curduser.php?aksi=destroy";
+    
+            let params = "iduser="+iduser;
+            
+            storedta.open("POST", target,true);
+            storedta.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
+            storedta.send(params);
+
+            storedta.onload = function(){
+                const gdta = JSON.parse(this.responseText);
+                if(gdta.error == 0){
+                    setTimeout("window.location.href='latihan1.php'", 2000)
+                }
+            }
+        }
+    </script>
+</body>
+</html>

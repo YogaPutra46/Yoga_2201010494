@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        Nama
+        <input type="text" id="txNAMA">
+    </div>
+    <div>
+        Email
+        <input type="text" id="txEMAIL">
+    </div>
+
+    <div id="tampilkan"></div>
+    
+
+    <script src="jquery-3.7.0.min.js"></script>
+    <script>
+        $(function () {
+            let urtarget = "https://webpro.ptov.my.id/api/curduser.php?aksi=get";
+            
+            $.ajax({
+                url: urtarget,
+                success: function (dta, status, xhr) {
+                    let tx = '<table><tr><td>#</td><td>Nama Lengkap</td><td>Email</td><td>Username</td></tr>';
+                    let nox = 1
+                    for(let i=0; i<dta.affected; i++){
+                        tx += '<tr>';
+                        tx += '<td>'+nox+'</td>';
+                        tx += '<td>'+dta.isi[i][0]+'</td>';
+                        tx += '<td>'+dta.isi[i][1]+'</td>';
+                        tx += '<td>'+dta.isi[i][2]+'</td>';
+                        tx += '</tr>';
+                        nox++;
+                    }
+                    tx += '</table>';
+                    $("#tampilkan").html(tx);
+
+                }
+            });       
+        })
+
+    </script>
+
+</body>
+
+</html>
